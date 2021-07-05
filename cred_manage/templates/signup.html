@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+    <form class="signup-form" method="POST" action="{% url 'createUser' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="login" type="submit">Submit</button>
+        <button ><a href="{% url 'userLogin' %}">Login</a></button>
+    </form>
+    {% for msg in messages %}
+        {{msg}}
+    {% endfor %}
+</body>
+</html>

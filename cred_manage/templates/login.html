@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
+</head>
+<body>
+    {% comment %} <form class="login-form" action="{% url 'decode_txt' %}" method="POST"> {% endcomment %}
+    <form class="login-form" action="{% url 'userLogin' %}" method="POST">
+        {% csrf_token %}
+        <h1>Log In</h1>
+        <label for="username">Username</label><br>
+        <input type="text" name="username" id="username"><br>
+        <label for="password">Password</label><br>
+        <input type="password" name="password" id="password"><br>
+        <button name="login" type="submit">Submit</button>
+        <button ><a href="{% url 'createUser' %}">Register</a></button>
+    </form>
+    {% for msg in messages %}
+    {{msg}}
+    {% endfor %}
+</body>
+</html>

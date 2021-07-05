@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'NewDisplay/source.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block style %}
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Yatra+One&family=Zilla+Slab:ital@1&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap');
+    .centering {
+        padding:0px;
+    }
+    p {
+        font-family: 'Cinzel Decorative', cursive;
+    }
+    .badge_2 {
+        float: right;
+        margin-top: 20px;
+    }
+
+    .form {
+        font-family: 'Cinzel Decorative', cursive;
+        font-size: 20px;
+    }
+    h5{
+        margin: 0px 10px;
+        padding: 0px 0px 0px 30px;
+        color: white;
+    }
+    .sec1{
+        background-color: #fdb90d;
+        border-radius: 10px;
+    }
+
+    .form-input{
+        width:250px;
+        background-color: #fff;
+        align:left;
+        font-family: 'Zilla Slab', serif;
+        font-size: 20px;
+    }
+
+    .auth_btn {
+        color: white;
+        background-color: black;
+        font-size: 20px;
+        font-weight: 200;
+    }
+
+    .auth_btn:hover {
+        background-color: #fff;
+        color: #000;
+    }
+{% endblock %}
+
+{% block body %}
+    <h2>Login</h2>
+    <div class="centering">
+        <div class="login_signup">
+            <div class="sec1">
+                <section class="badge_2">
+                    <img class="auth_logo" src="{% static 'images/logo.png' %}" alt="logo">
+                    <h5>PASSWORD<br>MANAGER</h5>
+                </section>
+
+                <section class="auth_form">
+                    <form method="POST" action="{% url 'userLogin' %}">
+                        {% csrf_token %}
+                        <b><label for="user-name" class="form" >UserName</label></b><br>
+                        <input type="text" class="form-input" id="user-name" name="username" autocomplete="off"><br>
+
+                        <b><label for="password" class="form" >Password</label></b><br>
+                        <input type="password" class="form-input" id="password" name="password" autocomplete="off"><br>
+
+                        <button class="auth_btn form"  name="login" >login</button>
+                    </form>
+                </section>
+                <p>Don't have an account yet, <span ><a style="color: white" href="{% url 'createUser' %}">Create Account</a></span></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

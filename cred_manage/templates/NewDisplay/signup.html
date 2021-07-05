@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% extends 'NewDisplay/source.html' %}
+{% load static %}
+
+{% block title %}SignUp Page{% endblock %}
+
+{% block style %}
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Yatra+One&family=Zilla+Slab:ital@1&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap');
+    
+    .badge_2 {
+        float: right;
+        margin-top: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        padding-top: 50px;
+        font-family: 'Cinzel Decorative';
+        font-size: 30px;
+    }
+
+    h5{
+        margin: 0px 10px;
+        padding: 0px 30px;
+        color: white;
+    }
+
+    .sec1{
+        width: 600px;
+        height: 500px;
+        background-color: #fdb90d;
+        border-radius: 10px;
+    }
+
+    .login_signup{
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        width: 500px;
+        height: 500px;
+    }
+
+    .left-side{
+        float: left;
+    }
+
+    .right-side{
+        float: right;
+    }
+
+    input{
+        width:200px;
+        background-color: #fff;
+        font-size: 20px;
+        font-family: 'Zilla Slab';
+    }
+
+    .auth_btn {
+        background-color: #1b1a1a;
+        color: #ffffff;
+        font-family: 'Zilla Slab';
+        font-size: 20px;
+    }
+
+    .auth_btn:hover {
+        background-color: #ffffff;
+        color: #1b1a1a;
+        font-size: 30px;
+    }
+
+    form {
+        font-size: 20px;
+        font-family: 'Zilla Slab';
+    }
+
+    p {
+        margin-top: 20px;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: 'Zilla Slab';
+    }
+
+{% endblock %}
+
+{% block body %}
+    <div class="centering">
+        <div class="login_signup">
+            <div class="sec1">
+                <section class="badge_2">
+                    <img class="auth_logo" src="{% static 'images/logo.png' %}" alt="logo">
+                    <h5>PASSWORD<br>MANAGER</h5>
+                </section>
+                
+                <section class="auth_form">
+                    <form class="signup-form" method="POST" action="{% url 'createUser' %}">
+                        {% csrf_token %}
+                        <h2>Signup</h2>
+                        <div class="left-side">
+                            <b>{{form.first_name.label}}</b><br>
+                            {{form.first_name}}<br>
+
+                            <b>{{form.email.label}}</b><br>
+                            {{form.email}}<br>
+
+                            <b>{{form.password1.label}}</b><br>
+                            {{form.password1}}<br>
+                        </div>
+
+                        <div class="right-side">
+                            <b>{{form.last_name.label}}</b><br>
+                            {{form.last_name}}<br>
+                            {% comment %} <label for="user-name"></label><br> {% endcomment %}
+                            <b>{{form.username.label}}</b><br>
+                            {{form.username}}<br>
+
+                            <b>{{form.password2.label}}</b><br>
+                            {{form.password2}}<br>
+                        </div>
+                        {% comment %} <input type="password" id="password" name="password"><br> {% endcomment %}
+                        <button type='submit' class="auth_btn" name="login">Sign Up</button>
+                    </form>
+                </section>
+                <p>Already have an account, <span ><a style="color: white" href="{% url 'userLogin' %}">Log In</a></span></p>
+                {% for msg in messages %}
+                    {{msg}}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css">
+        {% comment %}  integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous" {% endcomment %}
+        <style>
+            nav{
+                display: flex;
+                color: white;
+                background: black;
+            }
+            p{
+                padding-right: 5%;
+                padding-left: 2%;
+            }
+            a{
+                float: right;
+                padding-left: 80%;
+                margin: 1%;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            {% if user.is_authenticated %}
+                <p>Hello, {{user.username}} </p><a href = "{% url 'userLogout' %}">Logout</a>
+            {% else %}
+                <a href = "{% url 'userLogin' %}">Login</a>
+            {% endif %}
+        </nav>
+        {% block body %}
+        {% endblock %}
+        {% comment %} <form method="post" action="{% url 'test' %}">
+            {% csrf_token %}
+            <input type="text" name="sample_txt" placeholder="Enter Text to Encrypt!">
+            <br>
+            <input type="submit">
+        </form> {% endcomment %}
+    </body>
+</html>

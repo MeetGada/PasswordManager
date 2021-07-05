@@ -1,0 +1,333 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 90vh;
+    overflow: hidden; 
+
+}
+h1 {
+    color: white;
+}
+
+h2{
+    margin-bottom: 25px;
+    font-family: 'Sulphur Point', sans-serif;
+}
+
+h5{
+    font-family: "Ubuntu", "san-serif";
+}
+
+p{
+    margin-top: 35px;
+    text-align: center;
+    font-family: 'Reem Kufi', sans-serif;
+}
+
+button{
+    background-color: #FDB90C;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+
+input {
+    text-align: center;
+    font-family: "Tajawal","sans-serif";
+}
+.nav-bar button{
+    color: white;
+    text-decoration: none;
+    font-family: 'Shrikhand', cursive;
+    font-size: 1.3rem;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.top-div{
+    width: 100%;
+    height: 100px;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #4A3933;
+    position: fixed;
+}
+
+.logo{
+    width: 60px;
+    height: 60px;
+    padding-right: 3px;
+    float: left;
+    border-radius: 50%;
+    transition: transform 2s;
+}
+
+.logo:hover{
+    transform: rotate(360deg);
+}
+.badge{
+    margin: -40px 100px;
+}
+
+.badge-move {
+    margin-left: 220px;
+}
+.nav-bar{
+    width:200px;
+    height:1000%;
+    background-color:#FDB90C;
+    position: absolute;
+    overflow: hidden;
+}
+
+.menu-bar-close{
+    color: white;
+    border: none;
+    transform: translate(30px,28px);
+    cursor: pointer;
+
+}
+
+.menu-bar-open{
+    margin: 28px 0 0 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.menu-bar-open:hover{
+    color: wheat;
+}
+
+.add-password{
+    color: white;
+    margin-top: 100px;
+    width:100%;
+    height: 80px;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.add-password:hover{
+    background-color:#f5a700;
+    transition: 0.5s;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.show-password{
+    color: white;
+    width:100%;
+    height: 80px;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.show-password:hover{
+    background-color:#f5a700;
+    transition: 0.5s;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.password-generator{
+    color: white;
+    width:100%;
+    height: 80px;
+    background: none;
+    border: none;
+    outline: none;
+}
+.password-generator:hover{
+    background-color:#f5a700;
+    transition: 0.5s;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.log-out{
+    color: white;
+    width:100%;
+    height: 80px;
+
+    border: none;
+    outline: none;
+}
+
+.log-out:hover {
+    background-color:#f5a700;
+    transition: 0.5s;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.nav-collapse{
+    visibility: collapse;
+}
+
+/* For password table */
+.centering{                       /* for centering the inner element */
+    width: 100%;
+    height: 100%;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-div{
+    width: 70%;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pass-table{
+     width: 90%;
+     text-align: center;
+     border-spacing: 0;
+     box-shadow: 0 12px 8px #cf9e49;
+     background-color: white;
+     border-collapse: collapse;
+     overflow: hidden;
+     font-family: 'Reem Kufi', sans-serif;
+     border-radius: 10px 10px 5px 5px;
+
+}
+
+th {
+    background-color: #FFB44B;
+    text-transform: uppercase;
+    color: white;
+}
+
+th,td {
+    padding: 10px 20px;
+}
+tr:nth-child(odd) {
+    background-color: #ebebeb;
+}
+
+
+/* LOG-IN PAGE */
+
+.login_signup {
+    width: 300px;
+    height: 400px;
+    border:1px solid gray;
+    margin: 150px 600px 200px  600px;
+    border-radius: 10px;
+}
+
+.sec1 {
+    width: 300px;
+    height: 400px;
+    float:left;
+}
+
+.auth_logo{
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin:-4px;
+}
+
+.badge_2 {
+    margin:20px 0 10px 170px;
+}
+
+.auth_form {
+    margin:20px 20px 10px
+}
+
+.auth_btn {
+    width: 100%;
+    height: 40px;
+    border-radius: 30px;
+    background-color: #ffb700;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    font-family: 'Varela', sans-serif;
+    color: white;
+    cursor: pointer;
+}
+.auth_btn:hover{
+    background-color:#f5a700;
+}
+label{
+    margin-left: 8px;
+    font-family: 'Varela', sans-serif;
+}
+
+input{
+    width: 90%;
+    height: 30px;
+    margin: 12px;
+    border-radius: 18px;
+    background-color: lightgray;
+    border: none;
+    outline: none;
+    
+}
+
+/* For Password Generator */
+
+.pass-generator-form{
+    width: 300px;
+    height: 300px;
+    padding: 40px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    text-align: center;
+
+
+}
+#pass-length {
+    width: 20%;
+    border-radius: 5px;
+    border: 2px solid gray;
+}
+
+.generate-btn{
+    width: 40%;
+    height:35px ;
+    margin-top: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px lightgray;
+    font-family: 'Varela', sans-serif;
+}
+
+#generate-form {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#pass {
+     width: 100px;
+     height:20px;
+    border: 2px solid gray;
+    font-family: 'Varela', sans-serif;
+}
+
+.copy{
+    width: 45px;
+    height: 25px;
+    margin-top: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px lightgray;
+    font-family: 'Varela', sans-serif;
+}
+
+@media only screen and (max-width:380px){  /*Phones*/
+    .badge{
+        margin-left: 80px;
+    }
+    .nav-bar {
+        width: 406px;
+        height: 450px;
+    }
+}

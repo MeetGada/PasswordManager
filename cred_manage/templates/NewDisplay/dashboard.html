@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+{% extends 'NewDisplay/source.html' %}
+{% load static %}
+
+{% block style %}
+    @import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@700&family=Zilla+Slab:ital@1&display=swap');
+    
+    .modal-container {
+        background-color: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-container.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .modal{
+        background-color: #fff;
+        border: 5px solid #101010;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        padding: 0px 0px 30px 50px;
+        max-width:100%;
+        width: 400px;
+        height: 200px;
+    }
+
+    #close {
+        float: right;
+    }
+
+    #close-btn {
+        background-color: black;
+        margin: 2px 5px;
+        padding: 2px 3px;
+    }
+
+    #displayData {
+        display: flex;
+        margin-top: 50px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-family: 'Stardos Stencil', cursive;
+    }
+
+    .table-div{
+        border:0px;
+    }
+
+    #tableData{
+        font-family: 'Zilla Slab', serif;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    #tableData a {
+        text-decoration: auto;
+        background-color: #ffb700;
+        color: white;
+        font-size: 20px;
+    }
+
+    #tableData a:hover {
+        color: #ffb700;
+        background-color: white;
+    }
+
+    .table-data{
+        padding: 5px;
+        font-family: 'Zilla Slab', serif;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .table-data:hover{
+        background: #fff;
+        color: #FDB90C;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+{% endblock %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block body %}
+<div class="centering">
+    <div class="table-div">
+        <div class="modal-container card-content" id="modal-container">
+            <div class="modal" id="modal">
+                <button id="close">x</button>
+            </div>
+        </div>
+        <table class="pass-table" id="tableData" >
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    const open = document.getElementById('open')
+    const modal_container = document.getElementById('modal-container')
+    const close = document.getElementById('close')
+    const modal = document.getElementById('modal')
+
+    const getCookie = (name) => {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+
+    const displayTable = (data) => {
+        const tableData = document.getElementById('tableData')
+        tableData.innerHTML = `<tr><th width='40%'>Remarks</th>
+                                <th width='40%'>See Credentials</th>
+                                <th width='40%'>User-Name</th>
+                                <th width='40%'>Password</th>
+                                <th width='40%'>Last-Updated</th>
+                                <th width='10%'>Edit</th>
+                                <th width='10%'>Delete</th></tr>`
+        for(var i in data) {
+            var lastUpdated = new Date(data[i].last_updated)
+            tableData.innerHTML += 
+                `<tr><td>${data[i].description}</td>
+                <td><button id="open" class='table-data' onClick=rawData(${data[i].id})>See Data</button></td>
+                <td>${data[i].user_id.substring(9,40)}</td>
+                <td>${data[i].password.substring(9,40)}</td>
+                <td>${lastUpdated.toDateString()}</td>
+                <td><a href="http://localhost:8000/editData/${data[i].id}/" class='table-data'>Edit</a></td>
+                <td><button class='table-data' onClick=deleteDetails(${data[i].id})>Delete</button></td>
+                </tr>`
+        }
+    }
+
+    const setData =()=>{
+        const displayData = document.getElementsByClassName('pass-table')
+        fetch('{% url "dashboard" %}', {
+            method : 'POST',
+            headers : {
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'Data':'Hello'}),
+        }).then((res) => res.json())
+        .then((data) => {
+            displayTable(data)
+        })
+    }
+
+    const deleteDetails =(id)=> {
+        fetch('{% url "deleteData" %}', {
+            method : 'POST',
+            headers : {
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'id':id}),
+        }).then((res) => res.json())
+        .then((data)=>{
+            console.log(data)
+            setData()
+        })
+    }
+
+    const rawData = (id) => {
+        modal_container.classList.add('show')
+        fetch("{% url 'getRaw' %}", {
+            method : 'POST',
+            headers : {
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'id': id}),
+        }).then((res) => res.json())
+        .then((data) => {
+            modal.innerHTML = `<div id="close"><button id="close-btn" onClick=removeData()>
+                                <i class="material-icons">close</i></button></div>
+                                <div id="displayData"><h2>UserName:  ${data.username}<br>
+                                Password:  ${data.password}</h2></div>`                 
+        })
+    }
+
+    const removeData = () => {
+        modal_container.classList.remove('show')
+    }
+
+    setData()
+
+</script>
+{% endblock %}

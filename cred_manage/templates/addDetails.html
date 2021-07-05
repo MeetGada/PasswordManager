@@ -1,0 +1,20 @@
+{% extends 'source.html' %}
+{% block title %} Add Details {% endblock %}
+
+{% block body %}
+<br>
+<div>
+    <form method='POST' action=''>
+        {% csrf_token %}
+        {% if edit %}
+            <h1>Edit Data</h1>
+            Username: <input type='text' name='user_id' value='{{data.username}}'><br><br>
+            Password: <input type='text' name='password' value='{{data.password}}'><br><br>
+            {{form.description.label}}: {{form.description}}<br><br>
+        {% else %}
+            {{form.as_p}}
+        {% endif %}
+        <input type='submit' value='Submit'>
+    </from>
+</div>
+{% endblock %}
