@@ -19,8 +19,8 @@ def createUser(request):
         print(request.POST)
         if form.is_valid():
             form.save()
-            msg.success(request, 'User Created!!')
-        return HttpResponse('User Created!!')
+            return redirect('userLogin')
+        return HttpResponse('<h1>Please Details Properly!</h1>')
     else:
         form = customUserForm()
         context = {'form':form}
